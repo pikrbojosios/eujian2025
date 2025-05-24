@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ujian PIK-R - 30 Soal</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 20px auto;
+    background: #fffff;
+    padding: 20px;
+    color: #333;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  header img {
+    max-width: 150px;
+    height: auto;
+  }
+  h1 {
+    margin-top: 10px;
+    font-size: 1.8em;
+    color: #2c3e50;
+  }
+  .timer {
+    text-align: right;
+    font-weight: bold;
+    color: #d9534f;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+  }
+  form {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ccc;
+  }
+  .question {
+    margin-bottom: 20px;
+  }
+  .question b {
+    display: block;
+    margin-bottom: 8px;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    cursor: pointer;
+  }
+  label input {
+    margin-right: 10px;
+  }
+  button {
+    display: block;
+    background-color: #87ceeb;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+  button:hover {
+    background-color: #1a242f;
+  }
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+  }
+  @media(max-width: 480px) {
+    body {
+      padding: 10px;
+    }
+    header img {
+      max-width: 120px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="https://files.catbox.moe/jiio1u.jpg" alt="Logo PIK-R" />
+  <h1>PIK-R BojoSios</h1>
+</header>
+
+<div class="timer" id="timer">Waktu: 60:00</div>
+
+<form id="examForm" action="https://formspree.io/f/meogwbrl" method="POST" autocomplete="off" novalidate>
+  <div id="questions"></div>
+  <button type="submit">Kirim Jawaban</button>
+</form>
+
+<footer>
+  &copy; PIK-R Bojosios.Bersama Kita Bisa.
+</footer>
+
+<script>
+  const questions = [
+    {q: "Apa singkatan dari PIK-R?", options:["Pusat Informasi dan Konseling Remaja","Pendidikan Ilmu Kesehatan Remaja","Program Inovasi Kreatif Remaja","Pelatihan Ilmu Kepemudaan"], name:"q1"},
+    {q: "Tujuan utama PIK-R adalah?", options:["Meningkatkan kesehatan dan pengetahuan remaja","Membuat remaja menjadi atlet","Melatih remaja menjadi guru","Mengajarkan bahasa asing"], name:"q2"},
+    {q: "Salah satu fungsi PIK-R adalah?", options:["Menjadi pusat hiburan remaja","Menjadi tempat berkumpul untuk belajar dan konseling","Tempat jual beli barang","Menyediakan layanan transportasi"], name:"q3"},
+    {q: "Apa arti dari “Konseling”?", options:["Proses memberikan nasihat dan bimbingan","Proses membeli barang","Proses memasak makanan","Proses berolahraga"], name:"q4"},
+    {q: "Apa saja isu yang biasanya dibahas di PIK-R?", options:["Kesehatan reproduksi, narkoba, pergaulan bebas","Matematika dan fisika","Sejarah dan budaya","Olahraga dan musik"], name:"q5"},
+    {q: "Bagaimana cara menjaga kesehatan reproduksi?", options:["Berolahraga rutin dan makan sehat","Menghindari tidur","Minum minuman bersoda terus-menerus","Tidak pernah mandi"], name:"q6"},
+    {q: "Salah satu cara mencegah penyalahgunaan narkoba adalah?", options:["Menghindari pergaulan negatif","Membeli narkoba","Mencoba narkoba sekali-kali","Tidak peduli teman pakai narkoba"], name:"q7"},
+    {q: "Apa yang dimaksud dengan pergaulan bebas?", options:["Hubungan tanpa batas norma dan aturan","Berolahraga bersama teman","Belajar bersama di sekolah","Membantu orang tua"], name:"q8"},
+    {q: "Bagaimana cara mengatakan “tidak” pada tawaran narkoba?", options:["Tegas menolak dan menjauh","Menerima supaya tidak dianggap jelek","Membiarkan teman lain mencoba","Menolak ragu-ragu"], name:"q9"},
+    {q: "Apa manfaat mengikuti kegiatan PIK-R?", options:["Mendapatkan informasi benar tentang kesehatan dan remaja","Menghabiskan waktu tanpa tujuan","Membuat malas belajar","Memperbanyak teman negatif"], name:"q10"},
+    {q: "Kapan waktu tepat konsultasi di PIK-R?", options:["Saat masalah atau ingin tahu sesuatu","Saat libur sekolah","Hanya saat ujian","Saat sudah lulus sekolah"], name:"q11"},
+    {q: "Apa arti dari HIV/AIDS?", options:["Penyakit menyerang sistem imun tubuh","Penyakit kulit","Penyakit jantung","Penyakit tulang"], name:"q12"},
+    {q: "Bagaimana mencegah penularan HIV/AIDS?", options:["Menghindari hubungan seksual tanpa pengaman","Berbagi jarum suntik","Tidak pakai masker","Berbagi makanan"], name:"q13"},
+    {q: "Apa yang dimaksud pubertas?", options:["Masa perubahan fisik menuju dewasa","Masa bayi","Masa tua","Masa anak-anak"], name:"q14"},
+    {q: "Ciri pubertas remaja laki-laki?", options:["Suara berat & tumbuh rambut wajah","Tumbuh gigi susu","Tumbuh rambut kaki saja","Suara kecil"], name:"q15"},
+    {q: "Pentingnya menjaga kebersihan diri?", options:["Cegah penyakit dan jaga kesehatan","Membuat teman tidak suka","Buat tubuh bau","Buat malas"], name:"q16"},
+    {q: "Cara menjaga kesehatan mental?", options:["Berbagi cerita pada orang terpercaya","Simpan masalah sendiri","Hindari semua orang","Gunakan narkoba"], name:"q17"},
+    {q: "Apa itu kesehatan reproduksi?", options:["Kondisi fisik dan mental baik pada reproduksi","Makanan sehat","Olahraga","Pakaian bersih"], name:"q18"},
+    {q: "Apa harus dilakukan jika mengalami kekerasan?", options:["Laporkan pada pihak berwenang/konselor","Simpan sendiri","Balas kekerasan","Diam"], name:"q19"},
+    {q: "Cara mengatasi stres remaja?", options:["Lakukan hobi dan istirahat cukup","Abaikan perasaan","Makan terus-menerus","Berkelahi"], name:"q20"},
+    {q: "Arti pergaulan sehat?", options:["Bergaul teman positif dan bertanggung jawab","Bergaul tanpa aturan","Ikut teman tanpa pikir","Menghindari semua orang"], name:"q21"},
+    {q: "Cara jaga hubungan baik keluarga?", options:["Saling hormat dan komunikasi baik","Abaikan orang tua","Selalu bertengkar","Sembunyikan masalah"], name:"q22"},
+    {q: "Apa itu gender?", options:["Peran sosial budaya laki/perempuan","Jenis makanan","Usia","Hobi"], name:"q23"},
+    {q: "Apa harus dilakukan saat sedih?", options:["Ceritakan pada orang terpercaya dan cari solusi","Sendirian terus","Hindari makan","Marah tanpa sebab"], name:"q24"},
+    {q: "Mengapa penting kenal diri sendiri?", options:["Kembangkan potensi dan atasi masalah","Tidak punya teman","Malas belajar","Selalu mengalah"], name:"q25"},
+    {q: "Arti seks bebas?", options:["Hubungan seksual tanpa komitmen dan perlindungan","Pertemanan biasa","Olahraga bersama","Belajar bersama"], name:"q26"},
+    {q: "Cara cegah penyakit menular?", options:["Jaga kebersihan dan hindari kontak orang sakit","Berbagi alat makan","Tidak cuci tangan","Pakai pakaian kotor"], name:"q27"},
+    {q: "Apa nilai positif?", options:["Sikap dan perilaku baik membangun","Sikap buruk","Tiru teman negatif","Tidak peduli orang lain"], name:"q28"},
+    {q: "Mengapa remaja perlu ikut kegiatan positif?", options:["Kembangkan bakat dan jaga mental","Buang waktu","Hindari belajar","Bersaing teman"], name:"q29"},
+    {q: "Fungsi komunikasi baik dalam sosial?", options:["Memahami dan selesaikan masalah","Buat orang marah","Buat masalah","Diam saja"], name:"q30"},
+  ];
+
+  function createQuestions() {
+    const container = document.getElementById("questions");
+    questions.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      let html = `<b>${index+1}. ${item.q}</b>`;
+      item.options.forEach((opt, i) => {
+        html += `<label><input type="radio" name="${item.name}" value="${opt}" required> ${opt}</label>`;
+      });
+      div.innerHTML = html;
+      container.appendChild(div);
+    });
+  }
+
+  // Timer 60 menit
+  let time = 60 * 60; // detik
+  function startTimer() {
+    const timerEl = document.getElementById("timer");
+    const interval = setInterval(() => {
+      let minutes = Math.floor(time / 60);
+      let seconds = time % 60;
+      timerEl.textContent = `Waktu: ${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`;
+      if(time <= 0) {
+        clearInterval(interval);
+        alert("Waktu ujian telah habis! Jawaban akan dikirim otomatis.");
+        document.getElementById("examForm").submit();
+      }
+      time--;
+    }, 1000);
+  }
+
+  // Jalankan saat halaman siap
+  window.onload = () => {
+    createQuestions();
+    startTimer();
+  };
+</script>
+
+</body>
+</html>
